@@ -8,35 +8,11 @@ dotenv.config();
 
 const app = express();
 
-// Allow all Vercel URLs + localhost
-const allowedOrigins = [
-  'http://localhost:3000',
-  'http://localhost:3001',
-  process.env.FRONTEND_URL,
-  /\.vercel\.app$/,  // allow ALL vercel.app subdomains
-];
-
+// Middleware
 app.use(cors({
-  origin: function(origin, callback) {
-    // Allow requests with no origin (mobile apps, curl, etc.)
-    if (!origin) return callback(null, true);
-    
-    const allowed = allowedOrigins.some(allowed => {
-      if (!allowed) return false;
-      if (allowed instanceof RegExp) return allowed.test(origin);
-      return allowed === origin;
-    });
-
-    if (allowed) {
-      callback(null, true);
-    } else {
-      console.log('CORS blocked:', origin);
-      callback(null, true); // Allow anyway in production
-    }
-  },
+  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
   credentials: true
 }));
-
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 

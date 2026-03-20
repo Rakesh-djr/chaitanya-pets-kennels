@@ -1,0 +1,180 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Lato:wght@300;400;700;900&family=Dancing+Script:wght@400;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --gold: #d4a017;
+  --gold-light: #f0c040;
+  --gold-dark: #b8860b;
+  --brown: #a0522d;
+  --brown-dark: #5c3d08;
+  --cream: #fefaf4;
+  --parchment: #f5ede0;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+  background-color: var(--cream);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dark body {
+  background-color: #1a1008;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #f5e9d9; }
+::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--gold-dark); }
+
+/* Dark scrollbar */
+.dark ::-webkit-scrollbar-track { background: #2a1a08; }
+
+/* Gold text gradient */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #d4a017, #f0c040, #b8860b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Skeleton loader */
+.skeleton {
+  background: linear-gradient(90deg, #f0e6d3 25%, #fdf0e0 50%, #f0e6d3 75%);
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite;
+}
+
+.dark .skeleton {
+  background: linear-gradient(90deg, #2a1a08 25%, #3a2510 50%, #2a1a08 75%);
+  background-size: 1000px 100%;
+}
+
+/* WhatsApp button pulse */
+.whatsapp-btn {
+  animation: pulseGold 2s ease-in-out infinite;
+}
+
+/* Pet card hover effect */
+.pet-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.pet-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 25px 50px rgba(212, 160, 23, 0.2);
+}
+
+/* Glass morphism */
+.glass {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dark .glass {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(212, 160, 23, 0.15);
+}
+
+/* Input styles */
+.input-gold {
+  @apply w-full px-4 py-3 rounded-xl border-2 border-amber-200 bg-amber-50 text-brown-800 focus:outline-none focus:border-gold-500 transition-all duration-300;
+}
+
+.dark .input-gold {
+  @apply bg-brown-900 border-brown-700 text-amber-100 focus:border-gold-400;
+}
+
+/* Button styles */
+.btn-gold {
+  @apply bg-gold-gradient text-white font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300;
+  background: linear-gradient(135deg, #d4a017, #f0c040, #b8860b);
+}
+
+.btn-outline-gold {
+  @apply border-2 border-gold-500 text-gold-600 font-bold py-3 px-8 rounded-full hover:bg-gold-500 hover:text-white transition-all duration-300;
+}
+
+/* Section headers */
+.section-title {
+  @apply font-display text-4xl md:text-5xl font-bold text-brown-800 dark:text-amber-100;
+}
+
+.section-subtitle {
+  @apply font-accent text-xl text-gold-600 dark:text-gold-400;
+}
+
+/* Masonry grid */
+.masonry-grid {
+  columns: 2;
+  column-gap: 1rem;
+}
+@media (min-width: 768px) {
+  .masonry-grid { columns: 3; }
+}
+@media (min-width: 1024px) {
+  .masonry-grid { columns: 4; }
+}
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 1rem;
+}
+
+/* Star rating */
+.star-filled { color: #d4a017; }
+.star-empty { color: #d1d5db; }
+
+/* Page transition */
+.page-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+.page-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.4s, transform 0.4s;
+}
+
+/* Custom animations */
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulseGold {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(212, 160, 23, 0.5); }
+  50% { box-shadow: 0 0 0 20px rgba(212, 160, 23, 0); }
+}
+
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(40px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.7s ease-out forwards;
+}
+
+/* Dark mode transitions */
+.dark {
+  color-scheme: dark;
+}
